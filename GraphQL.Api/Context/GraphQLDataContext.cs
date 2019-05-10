@@ -14,5 +14,8 @@ namespace GraphQL.Api.Context
         public GraphQLDataContext(DbContextOptions<GraphQLDataContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<DataModel.Type> Types { get; set; }
     }
 }

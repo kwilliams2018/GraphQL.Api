@@ -24,7 +24,7 @@ namespace GraphQL.Api.Controllers
 
             var schema = new Schema
             {
-                Query = new User(_context)
+                Query = new CRMQuery(_context)
             };
 
             var result = await new DocumentExecuter().ExecuteAsync(x =>

@@ -13,11 +13,11 @@ namespace GraphQL.Api.Types
         {
             Name = "User";
 
-            Field(user => user.UserId, type: typeof(IdGraphType)).Description("The ID of the user");
-            Field(user => user.FirstName).Description("The user's first name");
-            Field(user => user.LastName).Description("The user's last name");
-            Field(user => user.Username).Description("The user's username");
-            Field(user => user.Password).Description("The user's password");
+            Field(user => user.UserId, type: typeof(IntGraphType));
+            Field(user => user.FirstName);
+            Field(user => user.LastName);
+            Field(user => user.Username);
+            Field(user => user.Password);
         }
     }
 }
