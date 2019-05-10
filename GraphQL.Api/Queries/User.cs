@@ -15,7 +15,7 @@ namespace GraphQL.Api.Queries
         {
             Field<Types.User>(
                 "User",
-                arguments: new QueryArguments(new QueryArgument<IGraphType> { Name = "id", Description = "The ID of the user" }),
+                arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "id" }),
                 resolve: context => 
                 {
                     var id = context.GetArgument<int>("id");

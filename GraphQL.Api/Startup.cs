@@ -38,7 +38,7 @@ namespace GraphQL.Api
             var settings = new ApiSettings();
             Configuration.GetSection("ApiSettings").Bind(settings);
 
-            if(settings.CORS != null)
+            if (settings.CORS != null)
             {
                 services.AddCors(options =>
                 {

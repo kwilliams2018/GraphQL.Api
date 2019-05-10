@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GraphQL;
-using GraphQL.Types;
 using Microsoft.AspNetCore.Mvc;
-using GraphQL.DataModel;
+using GraphQL.Types;
 using GraphQL.Api.Context;
 using GraphQL.Api.Queries;
 
@@ -16,27 +14,29 @@ namespace GraphQL.Api.Controllers
     public class GraphQLController : Controller
     {
         private readonly GraphQLDataContext _context;
+
         public GraphQLController(GraphQLDataContext context) => _context = context;
 
+        [HttpPost]
         public async Task<IActionResult> Query([FromBody] GraphQLQuery query)
         {
-            var inputs = query.Object.ToInputs();
+            var inputs = query.Variables.ToInputs();
 
             var schema = new Schema
             {
-                Query = new Queries.User(_context)
+                Query = new User(_context)
             };
 
-            var result = await new DocumentExecuter().ExecuteAsync(_ =>
+            var result = await new DocumentExecuter().ExecuteAsync(x =>
             {
-                _.Schema = schema;
-                _.Query = query.Query;
-                _.OperationName = query.Operation;
-                _.Inputs = inputs;
+                x.Schema = schema;
+                x.Query = query.Query;
+                //x.OperationName = query.OperationName;
+                x.Inputs = inputs;
             });
 
             if (result.Errors?.Count > 0)
-                return BadRequest();
+                return Ok(result.Errors);
 
             return Ok(result);
         }

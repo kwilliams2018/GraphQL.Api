@@ -8,9 +8,9 @@ namespace GraphQL.Api.Queries
 {
     public class GraphQLQuery
     {
-        public string Operation { get; set; }
+        public string OperationName { get; set; }
         public string NamedQuery { get; set; }
         public string Query { get; set; }
-        public JObject Object { get; set; }
+        public JObject Variables { get; set; }
     }
 }
